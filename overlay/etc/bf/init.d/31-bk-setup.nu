@@ -20,7 +20,7 @@ def create_if_not_link [
             mkdir $target
         }
 
-        rm --force $link
+        rm --force --recursive $link
         ^ln -s $target $link
     }
 }
