@@ -1,0 +1,2 @@
+/config www:www 0644 0755
+/specific www:www 0644 0755
