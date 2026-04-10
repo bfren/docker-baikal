@@ -1,0 +1,49 @@
+#!/usr/bin/nu
+
+use bf
+use bf-php
+
+# Absolute path to FreeScout source directory
+const src = "/etc/bf/src/baikal"
+
+def main [] {
+    # installed required and recommended extensions
+    cd /tmp
+    bf write $"Installing PHP extensions."
+    bf-php ext install_from_file
+
+    # install Baikal source files, content directory and default plugins
+    bf write debug $"Baikal source directory: ($src)."
+    install_source
+
+    # add bf-baikal module to config
+    bf config use bf-baikal
+
+    # cleanup
+    bf write "Removing /www files and directories."
+    rm --force --recursive /www/*
+}
+
+# Download and install FreeScout source files
+def install_source [] {
+    # add dependencies
+    bf write "Adding installation dependencies." install_source
+    bf pkg install ["--virtual" ".install" "git"]
+
+    # get version
+    let fs_version = bf fs read BAIKAL_REVISION
+
+    # save Baikal version to build log
+    bf build add Baikal $fs_version
+
+    # clone source files
+    bf write $"Cloning Baikal ($fs_version) into ($src)."
+    ^git clone --depth 1 --branch $fs_version https://github.com/sabre-io/Baikal $src
+
+    # set permissions
+    bf write $"Setting permissions on ($src)." install_source
+    [$src "www:www" "0400" "0500"] | bf ch apply
+
+    # remove installation dependencies
+    bf pkg remove [".install"]
+}
