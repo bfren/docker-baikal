@@ -35,4 +35,4 @@ ENV \
 
 RUN bf-install
 
-VOLUME [ "/config", "/specific" ]
+VOLUME [ "/config", "/data" ]

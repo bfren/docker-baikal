@@ -4,7 +4,7 @@ bf env load
 def main [] {
     bf write "Linking source to volume..."
     create_if_not_link (bf env BK_SRC_CONFIG) (bf env BK_CONFIG)
-    create_if_not_link (bf env BK_SRC_SPECIFIC) (bf env BK_SPECIFIC)
+    create_if_not_link (bf env BK_SRC_SPECIFIC) (bf env BK_DATA)
 
     return
 }
