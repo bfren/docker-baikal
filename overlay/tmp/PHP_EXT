@@ -1,0 +1,11 @@
+-curl
+-dom
+-iconv
+-openssl
+-pdo_mysql
+-pdo_pgsql
+-pdo_sqlite
+-simplexml
+-tokenizer
+-xmlreader
+-xmlwriter

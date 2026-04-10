@@ -1,0 +1,69 @@
+#!/usr/bin/nu
+
+use bf
+use bf-php
+
+# Absolute path to FreeScout source directory
+const src = "/etc/bf/src/baikal"
+
+def main [] {
+    # installed required and recommended extensions
+    cd /tmp
+    bf write $"Installing PHP extensions."
+    bf-php ext install_from_file
+
+    # install Baikal source files, content directory and default plugins
+    bf write debug $"Baikal source directory: ($src)."
+    install_source
+
+    # add bf-baikal module to config
+    bf config use bf-baikal
+
+    # cleanup
+    bf write "Removing /www files and directories."
+    rm --force --recursive /www/*
+}
+
+# Download and install FreeScout source files
+def install_source [] {
+    # add dependencies
+    bf write "Adding installation dependencies." install_source
+    bf pkg install ["--virtual" ".install" "unzip"]
+
+    # get version
+    let bk_version = bf fs read BAIKAL_REVISION
+
+    # save Baikal version to build log
+    bf build add Baikal $bk_version
+
+    # clone source files
+    let values = {
+        version: $bk_version
+    }
+    let url = bf string format $"https://github.com/sabre-io/Baikal/releases/download/{version}/baikal-{version}.zip" $values
+    bf write debug $"Baikal download url: ($url)." install_source
+
+    # download source files to /tmp and verify checksum
+    bf write $"Downloading Baikal ($bk_version)." install_source
+    let zip = "bk.zip"
+    bf http download $url $zip
+
+    # unzip files
+    let tmp = $"/tmp/baikal"
+    bf write $"Unzipping source download files to ($tmp)." install_source
+    ^unzip -oq $zip
+    rm $zip
+    if ($tmp | bf fs is_not_dir) { bf write error "Baikal not downloaded." install_source }
+
+    # move files to src directory
+    bf write $"Moving source files to ($src)." install_source
+    mv $tmp $src
+    if ($src | bf fs is_not_dir) { bf write error "Baikal not installed." install_source }
+
+    # set permissions
+    bf write $"Setting permissions on ($src)." install_source
+    [$src "www:www" "0400" "0500"] | bf ch apply
+
+    # remove installation dependencies
+    bf pkg remove [".install"]
+}
