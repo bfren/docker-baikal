@@ -4,7 +4,7 @@
 
 [Docker Repository](https://hub.docker.com/r/bfren/baikal) - [bfren ecosystem](https://github.com/bfren/docker)
 
-Comes with [Baïkal](https://sabre.io/baikal//) preinstalled, along with all the required and recommended PHP modules.
+Comes with [Baïkal](https://sabre.io/baikal/) preinstalled, along with all the required and recommended PHP modules.
 
 ## Contents
 
