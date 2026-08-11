@@ -7,7 +7,7 @@ docker pull bfren/alpine
 BASE_VERSION="8.2.2"
 echo "Base: ${BASE_VERSION}"
 
-PHP_VERSIONS="8.2 8.3 8.4"
+PHP_VERSIONS="8.2 8.3 8.4 8.5"
 for V in ${PHP_VERSIONS} ; do
 
     echo "Baikal for PHP ${V}"
