@@ -6,6 +6,16 @@ def main [] {
     create_if_not_link (bf env BK_SRC_CONFIG) (bf env BK_CONFIG)
     create_if_not_link (bf env BK_SRC_SPECIFIC) (bf env BK_DATA)
 
+    # Baikal refuses to install unless the SQLite file's folder already exists
+    # and is writable; replacing Specific with the link drops the bundled db/,
+    # and ch.d has already run by now, so create and own it here.
+    let db = $"(bf env BK_DATA)/db"
+    if not ($db | path exists) {
+        bf write debug $" .. creating ($db)"
+        mkdir $db
+        ^chown www:www $db
+    }
+
     return
 }
 
