@@ -17,7 +17,7 @@ def main [] {
     install_source
 
     # add bf-baikal module to config
-    bf config use bf-baikal
+    bf config use_mod bf-baikal
 
     # cleanup
     bf write "Removing /www files and directories."
