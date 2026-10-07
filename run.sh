@@ -14,6 +14,6 @@ docker buildx build \
     && \
     docker run -it \
         -e BF_DEBUG=1 \
-        -p "127.0.0.1:80:80" \
+        -p "127.0.0.1:3000:80" \
         baikal${PHP}-dev \
         sh
