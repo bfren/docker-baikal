@@ -28,24 +28,27 @@ def check_legacy [] {
     }
 }
 
-# Create a link to a target if the link does not exist.
+# Create a link if it does not exist.
 def create_if_not_link [
     link: string    # Path to the link to check
-    target: string  # Target to use if $link does not exist
+    source: string  # Source file to use if $link does not exist
 ] {
     if ($link | bf fs is_not_symlink) {
-        bf write debug $" .. ($link) to ($target)"
+        bf write debug $" .. ($link) to ($source)"
 
         # create target
-        if not ($target | path exists) {
-            mkdir $target
+        if not ($source | path exists) {
+            mkdir $source
         }
 
         # move any existing files to the target
-        mv $"($link)/*" $target
+        ls --all --full-paths $link | each {|file|
+            bf write debug $"Moving ($file.name) to ($source)..." script?
+            mv $file.name $source
+        }
 
         # delete and remake as link
         rm --force --recursive $link
-        ^ln -s $target $link
+        ^ln -s $source $link
     }
 }
