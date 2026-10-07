@@ -9,6 +9,11 @@ ARG BF_VERSION
 COPY ./overlay /
 COPY ./php8.3/overlay /
 
+ENV \
+    # override default paths to use volume mounts
+    BAIKAL_PATH_CONFIG=/config \
+    BAIKAL_PATH_SPECIFIC=/data
+
 RUN bf-install
 
 VOLUME [ "/config", "/data" ]
