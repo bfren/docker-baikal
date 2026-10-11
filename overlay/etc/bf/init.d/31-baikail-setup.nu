@@ -7,7 +7,7 @@ def main [] {
     # stop container if legacy setup detected
     let legacy = "/specific/db"
     let data = bf env BAIKAL_DATA_D
-    if ($legacy | path exists ) {
+    if ($legacy | path exists ) and (ls $legacy | is-not-empty) {
         bf write error $"Legacy setup detected - please move db directory from ($legacy) to ($data) and restart."
     }
 
