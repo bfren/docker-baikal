@@ -19,14 +19,19 @@ Comes with [Baïkal](https://sabre.io/baikal/) preinstalled, along with all the 
 
 ## Volumes
 
-| Volume     | Purpose                          |
-| ---------- | -------------------------------- |
-| `/config`  | Configuration files.             |
-| `/data`    | Persistent storage (users, etc). |
+| Volume     | Purpose              |
+| ---------- | -------------------- |
+| `/config`  | Configuration files. |
+| `/data`    | Persistent storage.  |
 
 See the [Nginx](https://github.com/bfren/docker-nginx) image for other configuration details.
 
 ## Environment Variables
+
+| Variable              | Values    | Description                                                                           | Default   |
+| --------------------- | --------- | ------------------------------------------------------------------------------------- | --------- |
+| `BF_BAIKAL_CONFIG_D`  | string    | Path to the Baikal configuration directory - should not normally need to be changed.  | '/config' |
+| `BF_BAIKAL_DATA_D`    | string    | Path to the Baikal data directory - should not normally need to be changed.           | '/data'   |
 
 See the [Nginx + PHP](https://github.com/bfren/docker-nginx-php) image for details of `www.conf` and `php.ini` overrides using environment variables.
 
