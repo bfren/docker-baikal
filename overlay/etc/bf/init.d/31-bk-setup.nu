@@ -1,4 +1,5 @@
 use bf
+use bf-s6
 bf env load
 
 # Earlier versions linked Specific to /specific instead of /data - if there is
@@ -23,6 +24,6 @@ def main [] {
     let db = $"($data)db"
     if ($db | bf fs is_not_dir ) {
         mkdir $db
-        bf ch apply_file "30-baikal"
+        bf-s6 ch apply_file "30-baikal"
     }
 }
