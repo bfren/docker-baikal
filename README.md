@@ -99,11 +99,12 @@ Older versions of this image kept Baïkal's data in `/specific`. If `/specific/d
 ## Testing
 
 ```sh
+./test.sh           # builds the PHP 8.5 image and runs /test
+./test.sh 8.2       # the same for PHP 8.2
 ./run.sh            # builds the PHP 8.5 image and opens a shell (port 3000, local only)
-./run.sh php8.2     # the same for PHP 8.2
 ```
 
-This image has no tests of its own.
+`/test` runs this image's tests alongside the base images' tests, and fails if tests don't execute. They check that Baïkal is installed read-only and matches the version in the build log, the database and other required PHP extensions are loaded, the `/.well-known` redirects are configured, and nginx accepts the configuration.
 
 ## Troubleshooting
 
