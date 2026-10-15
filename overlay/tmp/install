@@ -3,7 +3,7 @@
 use bf
 use bf-php
 
-# Absolute path to FreeScout source directory
+# Absolute path to Baikal source directory
 const src = "/etc/bf/src/baikal"
 
 def main [] {
@@ -24,7 +24,7 @@ def main [] {
     rm --force --recursive /www/*
 }
 
-# Download and install FreeScout source files
+# Download and install Baikal source files
 def install_source [] {
     # add dependencies
     bf write "Adding installation dependencies." install_source
