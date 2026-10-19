@@ -116,6 +116,16 @@ Most clients find Baïkal from the domain alone, using `/.well-known/caldav` and
 
 See [Upgrading from older versions](#upgrading-from-older-versions).
 
+## FAQs
+
+### Which database should I use?
+
+SQLite, unless you already run MySQL or PostgreSQL - it needs no other container, and is stored in `/data/db`, so backing up `/data` backs it up too.
+
+### How do I upgrade Baïkal?
+
+Baïkal is part of the image, so pull a newer tag and recreate the container. Back up `/config` and `/data` first - your settings and data are only in those volumes.
+
 ## Licence
 
 > [MIT](https://mit.bfren.dev/2026)
