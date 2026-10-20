@@ -1,26 +1,29 @@
 use bf
+use bf-s6
 bf env load
 
+# Earlier versions linked Specific to /specific instead of /data - if there is
+# data in there, warn and stop the container - otherwise, ensure /data/db exists
 def main [] {
-    bf write "Linking source to volume..."
-    create_if_not_link (bf env BK_SRC_CONFIG) (bf env BK_CONFIG)
-    create_if_not_link (bf env BK_SRC_SPECIFIC) (bf env BK_DATA)
+    # stop container if legacy setup detected
+    let legacy = "/specific/db"
+    let data = bf env BAIKAL_DATA_D
+    let config = bf env BAIKAL_CONFIG_D
+    if ($legacy | path exists ) and (ls $legacy | is-not-empty) {
+        [
+            "Legacy setup detected - "
+            $"please move db directory from ($legacy) to ($data), "
+            $"update 'sqlite_file' in ($config)/baikal.yaml"
+            "and restart your container."
+        ]
+            | str join
+            | bf write error $in
+    }
 
-    return
-}
-
-# Create a link to a target if the link does not exist.
-def create_if_not_link [
-    link: string    # Path to the link to check
-    target: string  # Target to use if $link does not exist
-] {
-    if ($link | bf fs is_not_symlink) {
-        bf write debug $" .. ($link) to ($target)"
-        if not ($target | path exists) {
-            mkdir $target
-        }
-
-        rm --force --recursive $link
-        ^ln -s $target $link
+    # path to correct db directory - trailing slash is required for BAIKAL_PATH_SPECIFIC so don't add it here
+    let db = $"($data)db"
+    if ($db | bf fs is_not_dir ) {
+        mkdir $db
+        bf-s6 ch apply_file "30-baikal"
     }
 }
