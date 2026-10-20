@@ -38,11 +38,10 @@ Open `http://localhost:8080` and follow Baïkal's set-up wizard: choose a time z
 * 🔍 `/.well-known` redirects, so most clients only need your domain name
 * 🐘 PHP 8.2, 8.3, 8.4 and 8.5 - choose with the image tag
 * 🗜️ Everything from [Nginx + PHP](https://github.com/bfren/docker-nginx-php#features): PHP-FPM, OPcache, compression, logs and a health check
-* 🖥️ Built for `linux/amd64`, `linux/arm64` and `linux/arm/v7`
 
 ## Tags
 
-Images are published to Docker Hub (`bfren/baikal`) and Quay.io (`quay.io/bfren/baikal`). Tags start with the PHP version, and can include the Baïkal version.
+Images are published to Docker Hub (`bfren/baikal`) and Quay.io (`quay.io/bfren/baikal`) for `linux/amd64`, `linux/arm/v7` and `linux/arm64`. Tags start with the PHP version, and can include the Baïkal version.
 
 | Tag                          | Example                     | Use when                                    |
 | ---------------------------- | --------------------------- | ------------------------------------------- |
