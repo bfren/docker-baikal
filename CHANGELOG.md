@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.2] - 2026-11-10
+
+### Changed
+
+- Base image updated to `bfren/nginx-php` 10.0.2, which moves to `bfren/nginx` 9.0.2 and Nushell 0.117.0 - your own
+  Nushell scripts may need changes - see the
+  [Nginx + PHP changelog](https://github.com/bfren/docker-nginx-php/blob/main/CHANGELOG.md).
+
+### Security
+
+- The Baikal download is checked against its SHA-256 hash before it is installed, so the build fails if the file
+  has been changed.
+
 ## [3.0.1] - 2026-11-06
 
 ### Changed
@@ -23,5 +36,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Images are built and published by the shared `bfren/docker` build workflow (`build.yml`), replacing the separate
   `dev.yml` and `publish.yml` workflows.
 
+[3.0.2]: https://github.com/bfren/docker-baikal/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/bfren/docker-baikal/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/bfren/docker-baikal/compare/v2.0.7...v3.0.0
