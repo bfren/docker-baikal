@@ -47,6 +47,10 @@ def install_source [] {
     bf write $"Downloading Baikal ($bk_version)." install_source
     let zip = "bk.zip"
     bf http download $url $zip
+    let hash = bf fs read BAIKAL_SHA256
+    { $"($hash)  ($zip)" | ^sha256sum -c - } | bf handle -f {|code, err|
+        bf write error "Baikal download does not match checksum - update BAIKAL_SHA256 with BAIKAL_REVISION." install_source
+    } install_source
 
     # unzip files
     let tmp = $"/tmp/baikal"
