@@ -48,11 +48,11 @@ Images are published to Docker Hub (`bfren/baikal`) and Quay.io (`quay.io/bfren/
 | `phpX.Y`                     | `php8.4`                    | You want the latest image for a PHP version |
 | `phpX.Y-MAJOR`               | `php8.4-3`                  | You want updates, but not breaking changes  |
 | `phpX.Y-MINOR`               | `php8.4-3.0`                | You want fixes only - **recommended**       |
-| `phpX.Y-VERSION`             | `php8.4-3.0.3`              | You want to pin this image exactly          |
+| `phpX.Y-VERSION`             | `php8.4-3.0.4`              | You want to pin this image exactly          |
 | `phpX.Y-baikalA.B`           | `php8.4-baikal0.13`         | You want to stay on a Baïkal minor version  |
 | `phpX.Y-baikalA.B.C`         | `php8.4-baikal0.13.0`       | You want an exact Baïkal release            |
-| `…-VERSION` versions of both | `php8.4-baikal0.13.0-3.0.3` | You want to pin both                        |
-| `phpX.Y.Z`                   | `php8.4.27`                 | You want an exact PHP release               |
+| `…-VERSION` versions of both | `php8.4-baikal0.13.0-3.0.4` | You want to pin both                        |
+| `phpX.Y.Z`                   | `php8.4.28`                 | You want an exact PHP release               |
 | `baikalA.B.C`, `…-VERSION`   | `baikal0.13.0`              | You want a Baïkal release, on PHP 8.4       |
 
 There is no `latest` tag. See [Nginx + PHP](https://github.com/bfren/docker-nginx-php#tags) for PHP support dates.
