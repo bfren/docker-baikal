@@ -29,6 +29,8 @@ services:
       - ./v/data:/data
 ```
 
+This example is also in [`docker-compose.yml`](docker-compose.yml).
+
 1. Run `docker compose up -d`, then open `http://localhost:8080`.
 2. Follow Baïkal's set-up wizard: choose a time zone and admin password, then the database. SQLite is simplest - it is stored in `/data/db` and needs no other container.
 3. Add users in the admin area.

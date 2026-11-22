@@ -1,0 +1,8 @@
+services:
+  baikal:
+    image: quay.io/bfren/baikal:php8.4-3.0
+    ports:
+      - "8080:80"
+    volumes:
+      - ./v/config:/config
+      - ./v/data:/data
