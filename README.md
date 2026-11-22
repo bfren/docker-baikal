@@ -62,6 +62,8 @@ Images are published to Docker Hub (`bfren/baikal`) and Quay.io (`quay.io/bfren/
 | `phpX.Y.Z`                   | `php8.4.28`                 | You want an exact PHP release               |
 | `baikalA.B.C`, `…-VERSION`   | `baikal0.13.0`              | You want a Baïkal release, on PHP 8.4       |
 
+A new `MAJOR` version means a breaking change. Before moving to one, read the [changelog](CHANGELOG.md), where each breaking change is marked **Breaking**.
+
 There is no `latest` tag. See [Nginx + PHP](https://github.com/bfren/docker-nginx-php#tags) for PHP support dates.
 
 ## Configuration
