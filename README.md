@@ -29,7 +29,14 @@ services:
       - ./v/data:/data
 ```
 
-Open `http://localhost:8080` and follow Baïkal's set-up wizard: choose a time zone and admin password, then the database (SQLite is simplest, and is stored in `/data/db`). Then add users in the admin area, and point your calendar and contacts apps at `https://<your-domain>/dav.php` (most will also find it from just the domain).
+This example is also in [`docker-compose.yml`](docker-compose.yml).
+
+1. Run `docker compose up -d`, then open `http://localhost:8080`.
+2. Follow Baïkal's set-up wizard: choose a time zone and admin password, then the database. SQLite is simplest - it is stored in `/data/db` and needs no other container.
+3. Add users in the admin area.
+4. Point your calendar and contacts apps at `https://<your-domain>/dav.php`. Most will also find it from the domain alone.
+
+The image has no HTTPS - put it behind a reverse proxy such as [Caddy Proxy](https://github.com/bfren/docker-caddy-proxy).
 
 ## Features
 
@@ -48,12 +55,14 @@ Images are published to Docker Hub (`bfren/baikal`) and Quay.io (`quay.io/bfren/
 | `phpX.Y`                     | `php8.4`                    | You want the latest image for a PHP version |
 | `phpX.Y-MAJOR`               | `php8.4-3`                  | You want updates, but not breaking changes  |
 | `phpX.Y-MINOR`               | `php8.4-3.0`                | You want fixes only - **recommended**       |
-| `phpX.Y-VERSION`             | `php8.4-3.0.4`              | You want to pin this image exactly          |
+| `phpX.Y-VERSION`             | `php8.4-3.0.5`              | You want to pin this image exactly          |
 | `phpX.Y-baikalA.B`           | `php8.4-baikal0.13`         | You want to stay on a Baïkal minor version  |
 | `phpX.Y-baikalA.B.C`         | `php8.4-baikal0.13.0`       | You want an exact Baïkal release            |
-| `…-VERSION` versions of both | `php8.4-baikal0.13.0-3.0.4` | You want to pin both                        |
+| `…-VERSION` versions of both | `php8.4-baikal0.13.0-3.0.5` | You want to pin both                        |
 | `phpX.Y.Z`                   | `php8.4.28`                 | You want an exact PHP release               |
 | `baikalA.B.C`, `…-VERSION`   | `baikal0.13.0`              | You want a Baïkal release, on PHP 8.4       |
+
+A new `MAJOR` version means a breaking change. Before moving to one, read the [changelog](CHANGELOG.md), where each breaking change is marked **Breaking**.
 
 There is no `latest` tag. See [Nginx + PHP](https://github.com/bfren/docker-nginx-php#tags) for PHP support dates.
 
@@ -93,7 +102,11 @@ When the container starts, [Nginx + PHP](https://github.com/bfren/docker-nginx-p
 
 ### Upgrading from older versions
 
-Older versions of this image kept Baïkal's data in `/specific`. If `/specific/db` has anything in it, the container stops with a message: move the `db` folder to `/data`, update `sqlite_file` in `/config/baikal.yaml`, and start the container again.
+Older versions of this image kept Baïkal's data in `/specific`. If `/specific/db` has anything in it, the container stops with a message. To upgrade:
+
+1. Move the `db` folder from `/specific` to `/data`.
+2. In `/config/baikal.yaml`, change `sqlite_file` so it points to the database in its new folder.
+3. Start the container again.
 
 ## Testing
 
